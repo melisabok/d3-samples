@@ -19,19 +19,53 @@ text {
   shape-rendering: crispEdges;
 }
 
+
 </style>
 <body>
   <div id="graph"></div>
 <script src="../d3/d3.v3.min.js"></script>
 <script>
 
-  var graph = d3.select("#graph").append("svg:svg").attr("width", "600px").attr("height", "600px");
+  var brands = [
+"HTV",
+"Infinito",
+"TruTV",
+"MuchMusic",
+"Glitz",
+"TBS",
+"Discovery Channel",
+"History ",
+"Comedy Central",
+"Sony",
+"Fox",
+"Boomerang",
+"Sony Spin",
+"Disney",
+"MTV",
+"Nickelodeon"
+  ]
+
+  var topics = [
+"Estrenos",
+"Trailers",
+"Nominaciones",
+"Audiencia",
+"Publicidad",
+"Programación",
+"Eventos",
+"Entretenimiento",
+"Servicio de TV por cable",
+"Tv y Series online"
+]
+
+
+  var graph = d3.select("#graph").append("svg:svg").attr("width", "1000px").attr("height", "700px");
   //Constants
-  var width = 500;
-  var height = 500;
-  var maxValue = 50;
-  var rows = 3;
-  var cols = 3;
+  var width = 900;
+  var height = 600;
+  var maxValue = 9576;
+  var rows = 16;
+  var cols = 10;
   
   var rowSize =  height / (2 * rows);
   var colSize =  width / (2 * cols);
@@ -43,17 +77,23 @@ text {
   var gap = 0;
   console.log(maxRatio);
 
-  var x = d3.scale.linear().domain([1, 3]).range([50 + maxRatio, 50+ (width - maxRatio)]);
-  var y = d3.scale.linear().domain([1, 3]).range([maxRatio, (height - maxRatio)]);
+  //var x = d3.scale.linear().domain([1, 3]).range([50 + maxRatio, 50+ (width - maxRatio)]);
+  //var y = d3.scale.linear().domain([1, 3]).range([maxRatio, (height - maxRatio)]);
+  var x = d3.scale.ordinal().rangeRoundBands([50 + maxRatio, 50+ (width - maxRatio)], .1);
+  var y = d3.scale.ordinal().rangeRoundBands([maxRatio, (height - maxRatio)], .1);
   var ratio = d3.scale.linear().domain([0, maxValue]).range([0, maxRatio]);
+ 
 
   var xAxis = d3.svg.axis()
     .scale(x)
-    .orient("bottom");
+    .orient("bottom")
+    .tickSize(cols)
+    .tickValues(topics);
 
 var yAxis = d3.svg.axis()
     .scale(y)
-    .orient("left");
+    .orient("left")
+    .tickFormat(d3.format(".2s"));
 
   graph.append("g")
       .attr("class", "x axis")
@@ -66,24 +106,27 @@ var yAxis = d3.svg.axis()
       .call(yAxis);
 
   
-  d3.tsv("../data/brands.tsv", function(error, data) {
+  d3.csv("../data/brands_topics.csv", function(error, data) {
+     x.domain(data.map(function(d) { return d.topicName; }));
+     y.domain(data.map(function(d) { return d.brandName; }));
   var node = graph.selectAll(".bubble")
       .data(data)
       .enter()
       .append("g")
       .attr("class", "bubble")
-      .attr("transform", function(d) { return "translate(" + x(d.topic) + "," + y(d.brand) + ")"; });
+      .attr("transform", function(d) { 
+        //console.log(d.topicName + ": " + x(d.topicName));
+        console.log(d.brandName + ": " + y(d.brandName));
+        return "translate(" + x(d.topicName) + "," + y(d.brandName) + ")"; 
+    });
 
   node.append("title")
-      .text(function(d) { return "Marca"});
+      .text(function(d) { return "Count: " + d.count});
 
   node.append("circle")
       .attr("r", function(d) { return ratio(d.count); });
 
-  node.append("text")
-      .attr("dy", ".3em")
-      .style("text-anchor", "middle")
-      .text(function(d) { return "Marca"; });  
+  
 
       });    
 

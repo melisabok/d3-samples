@@ -1,0 +1,161 @@
+brand,brandName,topic,topicName,count
+1,HTV,48,Estrenos,80
+1,HTV,49,Trailers,2
+1,HTV,50,Nominaciones,35
+1,HTV,51,Audiencia,3
+1,HTV,52,Publicidad,58
+1,HTV,53,Programación,1496
+1,HTV,54,Eventos,85
+1,HTV,55,Entretenimiento,4
+1,HTV,56,Servicio de TV por cable,6
+1,HTV,57,Tv y Series online,0
+5,Infinito,48,Estrenos,141
+5,Infinito,49,Trailers,0
+5,Infinito,50,Nominaciones,2
+5,Infinito,51,Audiencia,7
+5,Infinito,52,Publicidad,3
+5,Infinito,53,Programación,826
+5,Infinito,54,Eventos,4
+5,Infinito,55,Entretenimiento,25
+5,Infinito,56,Servicio de TV por cable,3
+5,Infinito,57,Tv y Series online,0
+10,TruTV,48,Estrenos,87
+10,TruTV,49,Trailers,1
+10,TruTV,50,Nominaciones,4
+10,TruTV,51,Audiencia,10
+10,TruTV,52,Publicidad,4
+10,TruTV,53,Programación,210
+10,TruTV,54,Eventos,35
+10,TruTV,55,Entretenimiento,24
+10,TruTV,56,Servicio de TV por cable,10
+10,TruTV,57,Tv y Series online,0
+14,MuchMusic,48,Estrenos,0
+14,MuchMusic,49,Trailers,0
+14,MuchMusic,50,Nominaciones,0
+14,MuchMusic,51,Audiencia,0
+14,MuchMusic,52,Publicidad,2
+14,MuchMusic,53,Programación,73
+14,MuchMusic,54,Eventos,45
+14,MuchMusic,55,Entretenimiento,0
+14,MuchMusic,56,Servicio de TV por cable,20
+14,MuchMusic,57,Tv y Series online,0
+15,Glitz,48,Estrenos,216
+15,Glitz,49,Trailers,1
+15,Glitz,50,Nominaciones,3
+15,Glitz,51,Audiencia,1
+15,Glitz,52,Publicidad,7
+15,Glitz,53,Programación,362
+15,Glitz,54,Eventos,56
+15,Glitz,55,Entretenimiento,17
+15,Glitz,56,Servicio de TV por cable,23
+15,Glitz,57,Tv y Series online,2
+16,TBS,48,Estrenos,37
+16,TBS,49,Trailers,0
+16,TBS,50,Nominaciones,1
+16,TBS,51,Audiencia,3
+16,TBS,52,Publicidad,7
+16,TBS,53,Programación,504
+16,TBS,54,Eventos,37
+16,TBS,55,Entretenimiento,20
+16,TBS,56,Servicio de TV por cable,11
+16,TBS,57,Tv y Series online,0
+21,Discovery Channel,48,Estrenos,90
+21,Discovery Channel,49,Trailers,2
+21,Discovery Channel,50,Nominaciones,10
+21,Discovery Channel,51,Audiencia,8
+21,Discovery Channel,52,Publicidad,80
+21,Discovery Channel,53,Programación,537
+21,Discovery Channel,54,Eventos,42
+21,Discovery Channel,55,Entretenimiento,16
+21,Discovery Channel,56,Servicio de TV por cable,16
+21,Discovery Channel,57,Tv y Series online,0
+22,History ,48,Estrenos,37
+22,History ,49,Trailers,14
+22,History ,50,Nominaciones,34
+22,History ,51,Audiencia,25
+22,History ,52,Publicidad,31
+22,History ,53,Programación,1845
+22,History ,54,Eventos,114
+22,History ,55,Entretenimiento,70
+22,History ,56,Servicio de TV por cable,63
+22,History ,57,Tv y Series online,0
+23,Comedy Central,48,Estrenos,11
+23,Comedy Central,49,Trailers,0
+23,Comedy Central,50,Nominaciones,3
+23,Comedy Central,51,Audiencia,1
+23,Comedy Central,52,Publicidad,9
+23,Comedy Central,53,Programación,71
+23,Comedy Central,54,Eventos,18
+23,Comedy Central,55,Entretenimiento,1
+23,Comedy Central,56,Servicio de TV por cable,8
+23,Comedy Central,57,Tv y Series online,0
+24,Sony,48,Estrenos,330
+24,Sony,49,Trailers,4
+24,Sony,50,Nominaciones,16
+24,Sony,51,Audiencia,25
+24,Sony,52,Publicidad,18
+24,Sony,53,Programación,509
+24,Sony,54,Eventos,48
+24,Sony,55,Entretenimiento,1
+24,Sony,56,Servicio de TV por cable,20
+24,Sony,57,Tv y Series online,9
+25,Fox,48,Estrenos,1067
+25,Fox,49,Trailers,25
+25,Fox,50,Nominaciones,43
+25,Fox,51,Audiencia,33
+25,Fox,52,Publicidad,56
+25,Fox,53,Programación,1881
+25,Fox,54,Eventos,123
+25,Fox,55,Entretenimiento,54
+25,Fox,56,Servicio de TV por cable,61
+25,Fox,57,Tv y Series online,12
+26,Boomerang,48,Estrenos,213
+26,Boomerang,49,Trailers,5
+26,Boomerang,50,Nominaciones,2
+26,Boomerang,51,Audiencia,28
+26,Boomerang,52,Publicidad,2
+26,Boomerang,53,Programación,2099
+26,Boomerang,54,Eventos,167
+26,Boomerang,55,Entretenimiento,4
+26,Boomerang,56,Servicio de TV por cable,10
+26,Boomerang,57,Tv y Series online,3
+35,Sony Spin,48,Estrenos,169
+35,Sony Spin,49,Trailers,1
+35,Sony Spin,50,Nominaciones,2
+35,Sony Spin,51,Audiencia,45
+35,Sony Spin,52,Publicidad,6
+35,Sony Spin,53,Programación,446
+35,Sony Spin,54,Eventos,116
+35,Sony Spin,55,Entretenimiento,2
+35,Sony Spin,56,Servicio de TV por cable,19
+35,Sony Spin,57,Tv y Series online,5
+38,Disney,48,Estrenos,282
+38,Disney,49,Trailers,28
+38,Disney,50,Nominaciones,8
+38,Disney,51,Audiencia,5
+38,Disney,52,Publicidad,2
+38,Disney,53,Programación,451
+38,Disney,54,Eventos,15
+38,Disney,55,Entretenimiento,100
+38,Disney,56,Servicio de TV por cable,4
+38,Disney,57,Tv y Series online,0
+41,MTV,48,Estrenos,4494
+41,MTV,49,Trailers,664
+41,MTV,50,Nominaciones,1214
+41,MTV,51,Audiencia,257
+41,MTV,52,Publicidad,22
+41,MTV,53,Programación,9576
+41,MTV,54,Eventos,2918
+41,MTV,55,Entretenimiento,27
+41,MTV,56,Servicio de TV por cable,13
+41,MTV,57,Tv y Series online,0
+43,Nickelodeon,48,Estrenos,744
+43,Nickelodeon,49,Trailers,10
+43,Nickelodeon,50,Nominaciones,79
+43,Nickelodeon,51,Audiencia,76
+43,Nickelodeon,52,Publicidad,60
+43,Nickelodeon,53,Programación,2322
+43,Nickelodeon,54,Eventos,309
+43,Nickelodeon,55,Entretenimiento,122
+43,Nickelodeon,56,Servicio de TV por cable,23
+43,Nickelodeon,57,Tv y Series online,6
