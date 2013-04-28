@@ -59,65 +59,74 @@ text {
 ]
 
 
-  var graph = d3.select("#graph").append("svg:svg").attr("width", "1000px").attr("height", "700px");
+  var graph = d3.select("#graph").append("svg:svg").attr("width", "900px").attr("height", "600px");
   //Constants
   var width = 900;
   var height = 600;
+  var left = 100;
+  var bottom = 100;
   var maxValue = 9576;
   var rows = 16;
   var cols = 10;
   
-  var rowSize =  height / (2 * rows);
-  var colSize =  width / (2 * cols);
+  var rowSize =  (height - bottom) / (2 * rows);
+  var colSize =  (width - left)/ (2 * cols);
   var maxRatio = rowSize;
   if(colSize < rowSize){
     maxRatio = colSize;
   }
+  var finalWidth = maxRatio * 2 * cols;
+  var finalHeight = maxRatio * 2 * rows;
+  var gapWidth = (width - finalWidth - left) / (cols - 1);
 
-  var gap = 0;
-  console.log(maxRatio);
+  console.log("gapWidth: " + gapWidth);
+  console.log("maxRatio: " + maxRatio);
+  console.log("finalWidth: " + finalWidth);
+  console.log("finalHeight: " + finalHeight);
 
   //var x = d3.scale.linear().domain([1, 3]).range([50 + maxRatio, 50+ (width - maxRatio)]);
   //var y = d3.scale.linear().domain([1, 3]).range([maxRatio, (height - maxRatio)]);
-  var x = d3.scale.ordinal().rangeRoundBands([50 + maxRatio, 50+ (width - maxRatio)], .1);
-  var y = d3.scale.ordinal().rangeRoundBands([maxRatio, (height - maxRatio)], .1);
+  var x = d3.scale.ordinal().rangeBands([left + maxRatio, left + maxRatio + finalWidth + (gapWidth * (cols - 1))]);
+  var y = d3.scale.ordinal().rangeBands([height - finalHeight - bottom + maxRatio, height - finalHeight - bottom + maxRatio + finalHeight]);
   var ratio = d3.scale.linear().domain([0, maxValue]).range([0, maxRatio]);
  
 
   var xAxis = d3.svg.axis()
     .scale(x)
     .orient("bottom")
-    .tickSize(cols)
     .tickValues(topics);
 
 var yAxis = d3.svg.axis()
     .scale(y)
     .orient("left")
-    .tickFormat(d3.format(".2s"));
+    .tickValues(brands);
+    
 
-  graph.append("g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(0," + height + ")")
-      .call(xAxis);
-
-  graph.append("g")
-      .attr("class", "y axis")
-      .attr("transform", "translate(50, 0)")
-      .call(yAxis);
 
   
   d3.csv("../data/brands_topics.csv", function(error, data) {
      x.domain(data.map(function(d) { return d.topicName; }));
      y.domain(data.map(function(d) { return d.brandName; }));
+
+       graph.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(" + -1 * (40) + "," + (height - bottom + maxRatio) + ")")
+      .call(xAxis);
+
+      graph.append("g")
+      .attr("class", "y axis")
+      .attr("transform", "translate(" + left + ", 0)")
+      .call(yAxis);
+  
   var node = graph.selectAll(".bubble")
       .data(data)
       .enter()
       .append("g")
       .attr("class", "bubble")
-      .attr("transform", function(d) { 
+      .attr("transform", function(d, i) { 
         //console.log(d.topicName + ": " + x(d.topicName));
         console.log(d.brandName + ": " + y(d.brandName));
-        return "translate(" + x(d.topicName) + "," + y(d.brandName) + ")"; 
+        return "translate(" + x(d.topicName)  + "," + y(d.brandName) + ")"; 
     });
 
   node.append("title")
@@ -126,7 +135,6 @@ var yAxis = d3.svg.axis()
   node.append("circle")
       .attr("r", function(d) { return ratio(d.count); });
 
-  
 
       });    
 
