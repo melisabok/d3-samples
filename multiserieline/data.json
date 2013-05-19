@@ -1,0 +1,26 @@
+[
+   {
+      "date":1368932400000,
+      "captured":203,
+      "mentioned":130,
+      "classified":50
+   },
+   {
+      "date":1368846000000,
+      "captured":425,
+      "mentioned":345,
+      "classified":100
+   },
+   {
+      "date":1368759600000,
+      "captured":345,
+      "mentioned":234,
+      "classified":67
+   },
+   {
+      "date":1368673200000,
+      "captured":567,
+      "mentioned":234,
+      "classified":145
+   }
+]
