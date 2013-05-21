@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
+<html>
+<head>
 <style>
 
 body {
@@ -27,11 +27,17 @@ body {
 }
 
 </style>
-<body>
-<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<script src="../d3/d3.v3.min.js"></script>
 <script>
 
-var width = 960,
+d3.json("data.json", function(error, data) {
+  visualize(data, "#main");
+});
+
+function visualize(data, placeholder){
+
+ var width = 960,
     height = 500,
     radius = Math.min(width, height) / 2;
 
@@ -43,15 +49,13 @@ var pie = d3.layout.pie()
     .sort(null)
     .value(function(d) { return d.count; });
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select(placeholder).append("svg")
     .attr("width", width)
     .attr("height", height)
   .append("g")
     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-d3.json("data.json", function(error, data) {
-
-  var total = 0;
+ var total = 0;
 
   data.forEach(function(d) {
     total = total + d.count;
@@ -67,14 +71,19 @@ d3.json("data.json", function(error, data) {
   g.append("path")
       .attr("d", arc)
       .attr("class", function(d) { return d.data.source; });
-      //.style("fill", function(d) { return color(d.data.source); });
-
+  
   g.append("text")
       .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
       .attr("dy", ".35em")
       .style("text-anchor", "middle")
       .text(function(d) { console.log(d.data.count / total); return Math.round(d.data.count / total * 100)+'%' ; });
 
-});
+
+}
 
 </script>
+</head>
+<body>
+  <div class="centered" id="main" ></div>
+</body>
+</html>
