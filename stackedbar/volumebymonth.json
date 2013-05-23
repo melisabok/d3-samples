@@ -1,0 +1,110 @@
+[
+   {
+      "date":1338519600000,
+      "datetime":"2012-06-01 00:00:00",
+      "values":{
+         "classified":0,
+         "mentioned":2,
+         "captured":3
+      }
+   },
+   {
+      "date":1341111600000,
+      "datetime":"2012-07-01 00:00:00",
+      "values":{
+         "classified":1,
+         "mentioned":1,
+         "captured":1
+      }
+   },
+   {
+      "date":1343790000000,
+      "datetime":"2012-08-01 00:00:00",
+      "values":{
+         "classified":1,
+         "mentioned":1,
+         "captured":2
+      }
+   },
+   {
+      "date":1346468400000,
+      "datetime":"2012-09-01 00:00:00",
+      "values":{
+         "classified":1,
+         "mentioned":3,
+         "captured":4
+      }
+   },
+   {
+      "date":1349060400000,
+      "datetime":"2012-10-01 00:00:00",
+      "values":{
+         "classified":1,
+         "mentioned":2,
+         "captured":2
+      }
+   },
+   {
+      "date":1351738800000,
+      "datetime":"2012-11-01 00:00:00",
+      "values":{
+         "classified":1,
+         "mentioned":4,
+         "captured":4
+      }
+   },
+   {
+      "date":1354330800000,
+      "datetime":"2012-12-01 00:00:00",
+      "values":{
+         "classified":1,
+         "mentioned":1,
+         "captured":1
+      }
+   },
+   {
+      "date":1357009200000,
+      "datetime":"2013-01-01 00:00:00",
+      "values":{
+         "classified":1,
+         "mentioned":7,
+         "captured":7
+      }
+   },
+   {
+      "date":1359687600000,
+      "datetime":"2013-02-01 00:00:00",
+      "values":{
+         "classified":3,
+         "mentioned":5,
+         "captured":5
+      }
+   },
+   {
+      "date":1362106800000,
+      "datetime":"2013-03-01 00:00:00",
+      "values":{
+         "classified":1,
+         "mentioned":5,
+         "captured":5
+      }
+   },
+   {
+      "date":1364785200000,
+      "datetime":"2013-04-01 00:00:00",
+      "values":{
+         "classified":105,
+         "mentioned":105,
+         "captured":961
+      }
+   },
+   {
+      "date":1367377200000,
+      "datetime":"2013-05-01 00:00:00",
+      "values":{
+         "classified":26,
+         "mentioned":3460,
+         "captured":3497
+      }
+   }
+]
