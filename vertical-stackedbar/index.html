@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.bar {
+  fill: steelblue;
+}
+
+rect.bordered {
+  stroke: #E6E6E6;
+  stroke-width:2px;   
+}
+
+
+</style>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+
+var rightBarWidth = 100;
+
+var margin = {top: 20, right: 20, bottom: 30, left: 40},
+    width = 960 - margin.left - margin.right - rightBarWidth,
+    height = 500 - margin.top - margin.bottom;
+
+var x = d3.scale.linear()
+    .range([0, width])
+
+var y = d3.scale.ordinal()
+    .rangeRoundBands([0, height], .2);
+
+var color = d3.scale.ordinal()
+    .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("top");
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+d3.json("data.json", function(error, data) {
+
+  color.domain(d3.keys(data[0].values));
+
+  data.forEach(function(d) {
+    var x0 = 0;
+    d.ranges = color.domain().map(function(name) { var res = {name: name, x0: x0, x1: d.values[name]}; 
+      x0 = d.values[name];
+      return res});
+    
+    d.total = d.ranges[d.ranges.length - 1].x1;
+  });
+
+  data.sort(function(a, b) { return b.total - a.total; });
+
+  x.domain([0, d3.max(data, function(d) { return d.total; })]);
+  //x.domain(d3.extent(data, function(d) { return d.date; }));
+  y.domain(data.map(function(d) { return d.name; }));
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0,0)")
+      .call(xAxis);
+
+  var state = svg.selectAll(".state")
+      .data(data)
+    .enter().append("g")
+      .attr("class", "g")
+      .attr("transform", function(d) { return "translate(0," + y(d.name) + ")"; });
+
+  //console.log(data)
+  state.selectAll("rect")
+      .data(function(d) { return d.ranges; })
+    .enter().append("rect")
+      .attr("width", function(d) { return x(d.x1) - x(d.x0); })
+      .attr("height", y.rangeBand())
+      //.attr("y", function(d) { return console.log(y(d.name)); y(d.name); })
+      .attr("x", function(d) { return x(d.x0); })
+      .style("fill", function(d) { return color(d.name); });
+
+  var svg2 = d3.select("body").append("svg")
+    .attr("width", rightBarWidth)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(0," + margin.top + ")");
+
+  var bar = svg2.selectAll(".bar")
+      .data(data)
+    .enter().append("g")
+      .attr("class", "g")
+      .attr("transform", function(d) { return "translate(0," + y(d.name) + ")"; });
+
+console.log(data);
+
+   var xMargin = 10;
+   var yMargin = 30;
+
+   bar.selectAll("rect")
+      .data(data)
+    .enter().append("rect")
+      .attr("width", rightBarWidth - 2*xMargin)
+      .attr("height", y.rangeBand() - 2*yMargin)
+      .attr("x", xMargin)
+      .attr("y", yMargin)
+      .attr("rx", 4)
+      .attr("ry", 4)
+      .attr("class", "bordered")
+      .style("fill", function(d) { return color(d.name); });
+
+    bar.append("text")
+      .attr("transform", function(d) { return "translate(" + xMargin + "," + yMargin + ")"; })
+      .attr("dy", ".35em")
+      .style("text-anchor", "middle")
+      .text(function(d) { return Math.round(d.values.deleted / d.total * 100)+'%' ; });       
+
+  /*var legend = svg.selectAll(".legend")
+      .data(color.domain().slice().reverse())
+    .enter().append("g")
+      .attr("class", "legend")
+      .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+
+  legend.append("rect")
+      .attr("x", width - 18)
+      .attr("width", 18)
+      .attr("height", 18)
+      .style("fill", color);
+
+  legend.append("text")
+      .attr("x", width - 24)
+      .attr("y", 9)
+      .attr("dy", ".35em")
+      .style("text-anchor", "end")
+      .text(function(d) { return d; });
+*/
+});
+
+</script>

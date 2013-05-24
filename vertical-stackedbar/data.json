@@ -1,0 +1,30 @@
+[
+   {
+      "name":"Fiat",
+      "values":{
+         "deleted":100,
+         "classified":500
+      }
+   },
+   {
+      "name":"Ford",
+      "values":{
+         "deleted":200,
+         "classified":600
+      }
+   },
+   {
+      "name":"Ferrari",
+      "values":{
+         "deleted":300,
+         "classified":450
+      }
+   },
+   {
+      "name":"Citroen",
+      "values":{
+         "deleted":263,
+         "classified":874
+      }
+   }         
+]
