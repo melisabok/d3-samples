@@ -19,7 +19,8 @@ body {
 
 rect.bordered {
   stroke: #E6E6E6;
-  stroke-width:2px;   
+  stroke-width:2px;
+  fill: #ff8c00;   
 }
 
 
@@ -53,7 +54,7 @@ var svg = d3.select("body").append("svg")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.json("data.json", function(error, data) {
+d3.json("volumebyontology.json", function(error, data) {
 
   color.domain(d3.keys(data[0].values));
 
@@ -103,30 +104,30 @@ d3.json("data.json", function(error, data) {
       .data(data)
     .enter().append("g")
       .attr("class", "g")
-      .attr("transform", function(d) { return "translate(0," + y(d.name) + ")"; });
+      .attr("transform", function(d) { return "translate(0," + y(d.name) + ")"; })
 
-console.log(data);
+   //console.log(data);
 
-   var xMargin = 10;
-   var yMargin = 30;
-
-   bar.selectAll("rect")
-      .data(data)
-    .enter().append("rect")
-      .attr("width", rightBarWidth - 2*xMargin)
-      .attr("height", y.rangeBand() - 2*yMargin)
-      .attr("x", xMargin)
-      .attr("y", yMargin)
+   //var xMargin = 10;
+   //var yMargin = 30;
+   bar.append("rect")
+      .attr("width", rightBarWidth)
+      .attr("height", y.rangeBand())
+      .attr("x", 0)
+      .attr("y", 0)
       .attr("rx", 4)
       .attr("ry", 4)
-      .attr("class", "bordered")
-      .style("fill", function(d) { return color(d.name); });
+      .attr("class", "bordered");
 
     bar.append("text")
-      .attr("transform", function(d) { return "translate(" + xMargin + "," + yMargin + ")"; })
+      .attr("transform", function(d) { return "translate(" + (rightBarWidth / 2 ) + "," + (y.rangeBand() / 2) + ")"; })
       .attr("dy", ".35em")
       .style("text-anchor", "middle")
-      .text(function(d) { return Math.round(d.values.deleted / d.total * 100)+'%' ; });       
+      .text(function(d) { if (d.total > 0 ) { 
+                                 return Math.round(d.values.deleted / d.total * 100)+'%'; 
+                                }else {
+                                  return '0%';
+                                }});       
 
   /*var legend = svg.selectAll(".legend")
       .data(color.domain().slice().reverse())
