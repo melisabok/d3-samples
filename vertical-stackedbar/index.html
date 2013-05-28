@@ -29,10 +29,11 @@ rect.bordered {
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
 
-var rightBarWidth = 100;
+var rightBarWidth = 50;
+var leftBarWidth = 100;
 
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
-    width = 960 - margin.left - margin.right - rightBarWidth,
+    width = 960 - margin.left - margin.right - rightBarWidth - leftBarWidth,
     height = 500 - margin.top - margin.bottom;
 
 var x = d3.scale.linear()
@@ -49,10 +50,17 @@ var xAxis = d3.svg.axis()
     .orient("top");
 
 var svg = d3.select("body").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    .attr("width", width + margin.left + margin.right + rightBarWidth + leftBarWidth)
+    .attr("height", height + margin.top + margin.bottom);
+
+var chart = svg.append("g")
+    .attr("transform", "translate(" + (margin.left + leftBarWidth) + "," + margin.top + ")");
+var leftBar = svg.append("g")
+    .attr("transform", "translate(0," + margin.top + ")");
+var rightBar = svg.append("g")
+    .attr("transform", "translate(" + (margin.left + leftBarWidth + width) + "," + margin.top + ")");
+
+
 
 d3.json("volumebyontology.json", function(error, data) {
 
@@ -70,21 +78,20 @@ d3.json("volumebyontology.json", function(error, data) {
   data.sort(function(a, b) { return b.total - a.total; });
 
   x.domain([0, d3.max(data, function(d) { return d.total; })]);
-  //x.domain(d3.extent(data, function(d) { return d.date; }));
   y.domain(data.map(function(d) { return d.name; }));
 
-  svg.append("g")
+  //chart
+  chart.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0,0)")
       .call(xAxis);
 
-  var state = svg.selectAll(".state")
+  var state = chart.selectAll(".state")
       .data(data)
     .enter().append("g")
       .attr("class", "g")
       .attr("transform", function(d) { return "translate(0," + y(d.name) + ")"; });
 
-  //console.log(data)
   state.selectAll("rect")
       .data(function(d) { return d.ranges; })
     .enter().append("rect")
@@ -94,27 +101,18 @@ d3.json("volumebyontology.json", function(error, data) {
       .attr("x", function(d) { return x(d.x0); })
       .style("fill", function(d) { return color(d.name); });
 
-  var svg2 = d3.select("body").append("svg")
-    .attr("width", rightBarWidth)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform", "translate(0," + margin.top + ")");
-
-  var bar = svg2.selectAll(".bar")
+  //right bar
+  var bar = rightBar.selectAll(".bar")
       .data(data)
     .enter().append("g")
       .attr("class", "g")
       .attr("transform", function(d) { return "translate(0," + y(d.name) + ")"; })
 
-   //console.log(data);
-
-   //var xMargin = 10;
-   //var yMargin = 30;
    bar.append("rect")
-      .attr("width", rightBarWidth)
-      .attr("height", y.rangeBand())
-      .attr("x", 0)
-      .attr("y", 0)
+      .attr("width", rightBarWidth - 10)
+      .attr("height", y.rangeBand() - 10)
+      .attr("x", 5)
+      .attr("y", 5)
       .attr("rx", 4)
       .attr("ry", 4)
       .attr("class", "bordered");
@@ -127,27 +125,21 @@ d3.json("volumebyontology.json", function(error, data) {
                                  return Math.round(d.values.deleted / d.total * 100)+'%'; 
                                 }else {
                                   return '0%';
-                                }});       
-
-  /*var legend = svg.selectAll(".legend")
-      .data(color.domain().slice().reverse())
+                                }});
+  //left bar
+  var leftbar = leftBar.selectAll(".leftbar")
+      .data(data)
     .enter().append("g")
-      .attr("class", "legend")
-      .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+      .attr("class", "g")
+      .attr("transform", function(d) { return "translate(0," + y(d.name) + ")"; })
 
-  legend.append("rect")
-      .attr("x", width - 18)
-      .attr("width", 18)
-      .attr("height", 18)
-      .style("fill", color);
-
-  legend.append("text")
-      .attr("x", width - 24)
-      .attr("y", 9)
+    leftbar.append("text")
+      .attr("transform", function(d) { return "translate(" + (leftBarWidth / 2 ) + "," + (y.rangeBand() / 2) + ")"; })
       .attr("dy", ".35em")
-      .style("text-anchor", "end")
-      .text(function(d) { return d; });
-*/
+      .style("text-anchor", "middle")
+      .text(function(d) { return d.name; });
+
+
 });
 
 </script>

@@ -1,0 +1,22 @@
+{
+ "outer":[
+	{
+		"type": "Topic",
+		"count": 2300
+	},
+	{
+		"type": "Brand",
+		"count": 3400
+	}
+ ],
+ "inner":[
+	{
+		"type": "Feature",
+		"count": 900
+	},
+	{
+		"type": "Product",
+		"count": 2100
+	}
+ ]
+}
