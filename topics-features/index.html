@@ -31,7 +31,7 @@ body {
 <script src="../d3/d3.v3.min.js"></script>
 <script>
 
-d3.json("data.json", function(error, data) {
+d3.json("topicsfeaturesfound.json", function(error, data) {
   visualize(data, "#main");
 });
 
@@ -41,10 +41,10 @@ function visualize(data, placeholder){
     height = 500,
     radius = Math.min(width, height) / 2 - 80;
 
-var color = d3.scale.ordinal()
+var innerColor = d3.scale.ordinal()
     .range(["#31a354", "#a1d99b"]);
 
-var color2 = d3.scale.ordinal()
+var outerColor = d3.scale.ordinal()
     .range(["#3182bd", "#9ecae1"]);
 
 var svg = d3.select(placeholder).append("svg")
@@ -53,11 +53,11 @@ var svg = d3.select(placeholder).append("svg")
   .append("g")
     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-var arc = d3.svg.arc()
+var innerArc = d3.svg.arc()
     .outerRadius(radius)
     .innerRadius(radius - 50);
 
-var arc2 = d3.svg.arc()
+var outerArc = d3.svg.arc()
     .outerRadius(radius - 50)
     .innerRadius(radius - 100);    
 
@@ -67,42 +67,55 @@ var pie = d3.layout.pie()
     .startAngle((3/2) * Math.PI) // start at 9 PM :)
     .endAngle((7/2) * Math.PI);
 
-console.log(pie(data.outer));
 var g = svg.selectAll(".arc")
       .data(pie(data.outer))
-    .enter().append("g")
+      .enter().append("g")
       .attr("class", "arc");
 
- g.append("path")
-      .attr("d", arc)
-      .style("fill", function(d) { return color(d.data.type); });
+      g.append("path")
+      .attr("d", outerArc)
+      .style("fill", function(d) { return outerColor(d.data.type); });
 
 var g2 = svg.selectAll(".arc2")
       .data(pie(data.inner))
-    .enter().append("g")
+      .enter().append("g")
       .attr("class", "arc2");
 
- g2.append("path")
-      .attr("d", arc2)
-      .style("fill", function(d) { return color2(d.data.type); });
+      g2.append("path")
+      .attr("d", innerArc)
+      .style("fill", function(d) { return innerColor(d.data.type); });
 
-    g.filter(function(d) { console.log(d.endAngle - d.startAngle); return d.endAngle - d.startAngle < 3; })
+    g.filter(function(d) { return d.endAngle - d.startAngle < 3; })
       .append("svg:text")
       .attr("dy", ".35em")
       .attr("text-anchor", "middle")
-      .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
+      .attr("transform", function(d) { return "translate(" + outerArc.centroid(d) + ")"; })
       .style("fill", "White")
       .style("font", "bold 12px Arial")
       .text(function(d) { return d.value; });
 
-    g2.filter(function(d) { console.log(d.endAngle - d.startAngle); return d.endAngle - d.startAngle < 3; })
+    g2.filter(function(d) { return d.endAngle - d.startAngle < 3; })
       .append("svg:text")
       .attr("dy", ".35em")
       .attr("text-anchor", "middle")
-      .attr("transform", function(d) { return "translate(" + arc2.centroid(d) + ")"; })
+      .attr("transform", function(d) { return "translate(" + innerArc.centroid(d) + ")"; })
       .style("fill", "White")
       .style("font", "bold 12px Arial")
       .text(function(d) { return d.value; });
+
+//Icon!!!
+  var g3 = svg.append("g")
+      .attr("transform", "translate(-35,-35)")
+      .attr("class", "center");
+
+  g3.append("rect")
+      .attr("width", radius - 100)
+      .attr("height", radius - 100)
+      .attr("y", 0)
+      .attr("x", 0)
+      .style("fill", "#000000");
+
+
 }
 
 </script>

@@ -1,0 +1,33 @@
+
+{"nodes":[
+{"name":"Captured"},
+{"name":"Raw Comments 'Excluded'"},
+{"name":"Match Comments"},
+{"name":"Opinions"},
+{"name":"Classified Opinions"},
+{"name":"Unclassified Opinions"},
+{"name":"Sentiment Opinions"},
+{"name":"Deleted Opinions"},
+{"name":"Positive Opinions"},
+{"name":"Negative Opinions"},
+{"name":"Objetive Opinions"},
+{"name":"Echo Opinions"}
+
+],
+"links":[
+{"source":0,"target":1,"value":124.729},
+{"source":0,"target":2,"value":40.597},
+{"source":2,"target":3,"value":40.597},
+{"source":3,"target":4,"value":40.000},
+{"source":3,"target":5,"value":20.000},
+{"source":4,"target":6,"value":35.000},
+{"source":4,"target":7,"value":5.000},
+{"source":6,"target":8,"value":5.000},
+{"source":6,"target":9,"value":15.000},
+{"source":6,"target":10,"value":15.000},
+{"source":5,"target":11,"value":20.000},
+{"source":8,"target":11,"value":5.000},
+{"source":9,"target":11,"value":15.000},
+{"source":10,"target":11,"value":15.000}
+
+]}
